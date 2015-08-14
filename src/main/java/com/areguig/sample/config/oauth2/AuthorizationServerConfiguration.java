@@ -15,12 +15,15 @@ import org.springframework.security.oauth2.provider.token.store.InMemoryTokenSto
 
 /**
  * Created by akli on 14/08/15.
+ * <p/>
+ * <p/>
+ * This class is the configuration class to the Oauth2 authorization server
  */
+
 @Configuration
 @EnableAuthorizationServer
 public class AuthorizationServerConfiguration
 		extends AuthorizationServerConfigurerAdapter {
-
 
 	@Autowired
 	@Qualifier("authenticationManagerBean")
@@ -37,6 +40,7 @@ public class AuthorizationServerConfiguration
 	public void configure(ClientDetailsServiceConfigurer clients)
 			throws Exception {
 		// @formatter:off
+		// Client app 'sample-client' details .
 		clients.inMemory()
 				.withClient("sample-client").
 				authorizedGrantTypes("authorization_code", "refresh_token",

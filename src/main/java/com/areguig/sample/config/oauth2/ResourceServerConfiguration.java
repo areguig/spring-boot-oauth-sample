@@ -10,6 +10,9 @@ import org.springframework.security.oauth2.provider.token.store.InMemoryTokenSto
 
 /**
  * Created by akli on 14/08/15.
+ * <p/>
+ * <p/>
+ * This class is the configuration class to the Oauth2 resource server
  */
 @Configuration
 @EnableResourceServer
@@ -18,10 +21,11 @@ public class ResourceServerConfiguration
 
 	@Override
 	public void configure(HttpSecurity http) throws Exception {
-		http
-				.requestMatchers().antMatchers("/protected/**").and()
-				.authorizeRequests()
-				.anyRequest().access("#oauth2.hasScope('sample-scope')");
+		// All the endpoints that match the pattern need an authenticated user
+		// with the scope 'sample-scope'.
+		http.requestMatchers().antMatchers("/protected/**").and()
+				.authorizeRequests().anyRequest()
+				.access("#oauth2.hasScope('sample-scope')");
 	}
 
 	@Override

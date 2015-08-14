@@ -1,5 +1,7 @@
 package com.areguig.sample.controller;
 
+import com.areguig.sample.bean.SampleUserDetails;
+import org.springframework.security.web.bind.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -12,10 +14,11 @@ import org.springframework.web.bind.annotation.RestController;
 public class ProtectedController {
 
 	@RequestMapping(method = RequestMethod.GET)
-	public String greetings() {
-		return "Hello ! you are accessing the protected side of the app";
+	public String greetings(
+			@AuthenticationPrincipal
+			SampleUserDetails user) {
+		return "Hello " + user.getUsername()
+				+ " ! You are accessing the protected side of the app";
 	}
-
-
 
 }
